@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PostMemo } from './dto/request.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Memo } from './entities/memo.entity';
 
 @Injectable()
 export class MemoService {
-  constructor(@InjectModel(Memo.name) private memoModel: Model<Memo></Memo>)
+  constructor(@InjectModel(Memo.name) private memoModel: Model<Memo>) {}
   create(dto: PostMemo) {
-    return 'This action adds a new memo';
+    const memo = new this.memoModel(dto);
+    return memo.save();
   }
 
   findAll() {
-    return `This action returns all memo`;
+    return this.memoModel.find().exec();
   }
 
   findOne(id: number) {
