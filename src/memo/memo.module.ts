@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       {
         name: Memo.name,
         schema: MemoSchema,
-      }
+      },
     ]),
   ],
   controllers: [MemoController],
